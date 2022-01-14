@@ -1,6 +1,13 @@
 <template>
   <div>
-    <conter-my :counter="c"></conter-my>
+    <h2>{{ c }}</h2>
+    <conter-my
+      :counter="c"
+      @addCounter="c = $event + 1"
+      :addc="addc"
+      :subc="subc"
+    ></conter-my>
+    <conter-my :addc="addc" :subc="subc"></conter-my>
   </div>
 </template>
 
@@ -13,7 +20,14 @@ export default {
     };
   },
   computed: {},
-  methods: {},
+  methods: {
+    addc() {
+      this.c += 1;
+    },
+    subc() {
+      this.c -= 1;
+    },
+  },
   watch: {},
   components: {
     conterMy: counter,

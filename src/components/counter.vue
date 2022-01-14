@@ -4,11 +4,28 @@
     <button @click="add()">add</button>
     <button @click="counter -= 1">sub</button>
     <button @click="counter = 0">res</button>
+    <button @click="addc()">add in perent</button>
+    <button @click="subc()">sub in perent</button>
   </div>
 </template>
 <script>
 export default {
-  props: ['counter'],
+  // props: ['counter'],
+  // props: {
+  //   counter: Number,
+  // },
+  props: {
+    counter: {
+      type: Number,
+      default: 0,
+    },
+    addc: {
+      type: Function,
+    },
+    subc: {
+      type: Function,
+    },
+  },
   // data() {
   //   return {
   //     counter: 0,
@@ -16,7 +33,8 @@ export default {
   // },
   methods: {
     add() {
-      this.counter += 1;
+      // this.counter += 1;
+      this.$emit('addCounter', this.counter);
     },
   },
 };
