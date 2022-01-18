@@ -5,9 +5,10 @@
 </template>
 <script>
 export default {
-  props: ['counter'],
   data() {
-    return {};
+    return {
+      counter: 0,
+    };
   },
   methods: {},
 };

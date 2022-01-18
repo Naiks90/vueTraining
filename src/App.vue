@@ -1,22 +1,28 @@
 <template>
   <div>
-    <conter-my :counter="c"></conter-my>
+    <h2 v-color:background.font="'green'">{{ text }}</h2>
+    <h2 v-color:color="'red'">{{ text }}</h2>
+    <h2 v-font>локальная деректива</h2>
   </div>
 </template>
 
 <script>
-import counter from './components/counter.vue';
 export default {
   data() {
     return {
-      c: 5,
+      text: 'Привет Вю!!!',
     };
   },
   computed: {},
   methods: {},
   watch: {},
-  components: {
-    conterMy: counter,
+  components: {},
+  directives: {
+    font: {
+      bind(el) {
+        el.style.fontSize = '55px';
+      },
+    },
   },
 };
 </script>
