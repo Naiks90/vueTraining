@@ -6,9 +6,14 @@
     <button @click="counter = 0">res</button>
     <button @click="addc()">add in perent</button>
     <button @click="subc()">sub in perent</button>
+    <button @click="updatecounter2()">
+      <!-- Дочерные компоненты(Увеличю на каунтер) -->
+      <slot name="btn"></slot>
+    </button>
   </div>
 </template>
 <script>
+import { eventEmmiter } from '../main';
 export default {
   // props: ['counter'],
   // props: {
@@ -35,6 +40,9 @@ export default {
     add() {
       // this.counter += 1;
       this.$emit('addCounter', this.counter);
+    },
+    updatecounter2() {
+      eventEmmiter.$emit('counter2Add', this.counter);
     },
   },
 };
