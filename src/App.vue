@@ -7,15 +7,7 @@
     <ul>
       <li v-for="name of filtersName" :key="name">{{ name }}</li>
     </ul>
-    <app-counter>
-      <h2>{{ message | UperCase }}</h2>
-
-      <input type="name" v-model="searchName" />
-
-      <ul>
-        <li v-for="name of filtersName" :key="name">{{ name }}</li>
-      </ul></app-counter
-    >
+    <app-counter></app-counter>
   </div>
 </template>
 
