@@ -43,7 +43,7 @@
           v-model.lazy="v$.confirmPassword.$model"
         />
 
-        <div class="invalid-feedback" v-if="v$.confirmPassword.sameAs">
+        <div class="invalid-feedback" v-if="v$.confirmPassword.sameAsPassword">
           Пароль не одинаков
         </div>
       </div>
@@ -84,7 +84,7 @@ export default {
     return {
       email: { required, email },
       password: { minLength: minLength(6) },
-      confirmPassword: { sameAs: sameAs('password') },
+      confirmPassword: { sameAsPassword: sameAs(this.password) },
     };
   },
 };
