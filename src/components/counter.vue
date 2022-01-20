@@ -1,11 +1,8 @@
 <template>
-  <div>
-    <h2>{{ counter }}</h2>
-  </div>
+  <div></div>
 </template>
 <script>
 export default {
-  props: ['counter'],
   data() {
     return {};
   },
