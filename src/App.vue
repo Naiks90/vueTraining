@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form class="pt-3">
+    <form class="pt-3" @submit.prevent="submit">
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -13,8 +13,11 @@
         <div class="invalid-feedback" v-if="v$.email.required.$invalid">
           Це поле не маэ бути пустим
         </div>
-        <div class="invalid-feedback" v-else-if="v$.email.$invalid">
+        <div class="invalid-feedback" v-else-if="v$.email.email.$invalid">
           Це не емeйл
+        </div>
+        <div class="invalid-feedback" v-else-if="v$.email.isUniqueEmail">
+          емейл занят
         </div>
       </div>
       <div class="form-group">
@@ -40,24 +43,30 @@
           id="confirm"
           class="form-control"
           :class="{ 'is-invalid': v$.confirmPassword.$error }"
-          v-model.lazy="v$.confirmPassword.$model"
+          v-model="v$.confirmPassword.$model"
         />
 
         <div class="invalid-feedback" v-if="v$.confirmPassword.sameAsPassword">
           Пароль не одинаков
         </div>
       </div>
+      <button class="btn btn btn-success" type="submit" :disabled="v$.$invalid">
+        submit
+      </button>
     </form>
-
-    <button @click="a()">1</button>
-    <button @click="b()">2</button>
   </div>
 </template>
 
 <script>
 import useVuelidate from '@vuelidate/core';
-import { required, email, minLength, sameAs } from '@vuelidate/validators';
-
+import {
+  required,
+  email,
+  minLength,
+  sameAs,
+  helpers,
+} from '@vuelidate/validators';
+const { withAsync } = helpers;
 export default {
   setup() {
     return { v$: useVuelidate() };
@@ -71,19 +80,32 @@ export default {
   },
 
   methods: {
-    a() {
-      console.log(this.v$.confirmPassword);
-    },
-    b() {
-      console.log(this.v$.password);
+    submit() {
+      let a = [this.email, this.password];
+      console.log(a);
     },
   },
   watch: {},
   components: {},
   validations() {
     return {
-      email: { required, email },
-      password: { minLength: minLength(6) },
+      email: {
+        required,
+        email,
+        isUniqueEmail: withAsync(function (newEmail) {
+          if (newEmail === '') {
+            return true;
+          }
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              const value = newEmail !== 'test@gmail.com';
+              resolve(value);
+            }, 500);
+          });
+        }),
+      },
+
+      password: { minLength: minLength(6), required },
       confirmPassword: { sameAsPassword: sameAs(this.password) },
     };
   },
