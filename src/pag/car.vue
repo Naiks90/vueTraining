@@ -1,6 +1,22 @@
 <template>
   <div>
     <h1>Car id {{ id }}</h1>
+    <button class="btn btn-info btn-sm" @click="goBackToCar()">Back</button>
+    <br />
+    <!-- <router-link
+      class="btn btn-info btn-sm"
+      tag="button"
+      :to="'/car' + id + '/full'"
+      >full info</router-link
+    > -->
+    <router-link
+      class="btn btn-info btn-sm"
+      tag="button"
+      :to="{ name: 'carFull', params: { id: id } }"
+      >full info</router-link
+    >
+    <hr />
+    <router-view></router-view>
   </div>
 </template>
 
@@ -14,8 +30,8 @@ export default {
   },
   computed: {},
   methods: {
-    a() {
-      console.log(this.$router);
+    goBackToCar() {
+      this.$router.push('/cars');
     },
   },
   watch: {
