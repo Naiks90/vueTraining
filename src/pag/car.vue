@@ -3,16 +3,22 @@
     <h1>Car id {{ id }}</h1>
     <button class="btn btn-info btn-sm" @click="goBackToCar()">Back</button>
     <br />
-    <!-- <router-link
-      class="btn btn-info btn-sm"
-      tag="button"
-      :to="'/car' + id + '/full'"
-      >full info</router-link
-    > -->
     <router-link
       class="btn btn-info btn-sm"
       tag="button"
-      :to="{ name: 'carFull', params: { id: id } }"
+      :to="'/car/' + id + '/full'"
+      >full info</router-link
+    >
+    <hr />
+    <router-link
+      class="btn btn-info btn-sm"
+      tag="button"
+      :to="{
+        name: 'carFull',
+        params: { id: id },
+        query: { name: 'Mazda', years: 2000 },
+        hash: '#scroll',
+      }"
       >full info</router-link
     >
     <hr />
@@ -40,6 +46,11 @@ export default {
     },
   },
   components: {},
+  beforeRouteLeave(to, fromR, next) {
+    if (window.confirm('Ви хотете покинуть страницу?')) {
+      next(true);
+    }
+  },
 };
 </script>
 
