@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h2>Counter {{ counter }}</h2>
+    <h2>Second Counter {{ counter }}</h2>
   </div>
 </template>
 <script>
 export default {
   computed: {
     counter() {
-      return this.$store.getters.computedCouner;
+      return this.$store.state.counter.counter;
     },
   },
   methods: {},
