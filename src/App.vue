@@ -1,24 +1,23 @@
 <template>
-  <div>
-    <conter-my :counter="c"></conter-my>
-  </div>
+  <v-toolbar dark color="primary">
+    <v-btn icon>
+      <v-icon>mdi-magnify</v-icon>
+    </v-btn>
+    <v-spacer></v-spacer>
+    <v-btn icon>
+      <v-icon>mdi-dots-vertical</v-icon>
+    </v-btn>
+  </v-toolbar>
 </template>
 
 <script>
-import counter from './components/counter.vue';
 export default {
-  data() {
-    return {
-      c: 5,
-    };
-  },
-  computed: {},
-  methods: {},
-  watch: {},
-  components: {
-    conterMy: counter,
-  },
+  name: 'App',
+
+  components: {},
+
+  data: () => ({
+    //
+  }),
 };
 </script>
-
-<style></style>
